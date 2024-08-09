@@ -7,6 +7,7 @@ import DW.PocatRush.enumstatus.ResultCode;
 import DW.PocatRush.service.UserDetailService;
 import DW.PocatRush.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,15 @@ public class UserController {
                         ResultCode.SUCCESS.getMsg())
                 , HttpStatus.OK);
 
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+        if ( session != null) {
+            session.invalidate();
+        }
+        return "You have been logged out.";
     }
 
     // 회원가입 0808 승환
