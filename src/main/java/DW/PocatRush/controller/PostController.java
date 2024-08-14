@@ -40,4 +40,15 @@ public class PostController {
                 HttpStatus.OK);
     }
 
+    //게시글 보여주기
+    @GetMapping("/{postId}")
+    public ResponseEntity<Post> getPostByPostId(@PathVariable long postId) {
+        return new ResponseEntity<>(postService.getPostByPostId(postId),HttpStatus.OK);
+    }
+
+    @GetMapping("/search/{text}")
+    public  ResponseEntity<List<Post>> searchPostByText(@PathVariable String text){
+        return new ResponseEntity<>(postService.searchPostByText(text),HttpStatus.OK);
+    }
+
 }

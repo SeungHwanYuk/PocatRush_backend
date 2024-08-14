@@ -1,5 +1,6 @@
 package DW.PocatRush.service;
 
+import DW.PocatRush.exception.ResourceNotFoundException;
 import DW.PocatRush.model.Board;
 import DW.PocatRush.model.Post;
 import DW.PocatRush.dto.PostDto;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,5 +58,21 @@ public class PostService {
         return postDto.toPostDtoFromPost(savePost);
     }
 
+    //게시글 보여주기
+    public Post getPostByPostId(long postId){
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if(postOptional.isPresent()) {
+            return postOptional.get();
+        } else {
+            throw new ResourceNotFoundException("postId가","없떠요",postId);
+        }
+    }
 
+    //검색기능
+    public List<Post> searchPostByText(String postName) {
+        return postRepository.findAll()
+                .stream()
+                .filter(postData -> postData.getPostText().contains(postName))
+                .collect(Collectors.toList());
+    }
 }
