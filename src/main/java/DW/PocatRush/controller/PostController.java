@@ -1,14 +1,12 @@
 package DW.PocatRush.controller;
 
 import DW.PocatRush.model.Post;
+import DW.PocatRush.dto.PostDto;
 import DW.PocatRush.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +30,14 @@ public class PostController {
     public ResponseEntity<List<Post>> getPostByWhatsnew() {
         long boardId = 2; // 공지사항 직접 불러오기
         return new ResponseEntity<>(postService.getPostByBoardId(boardId), HttpStatus.OK);
+    }
+
+    // 글쓰기 (게시판 번호 포함되어야함) 0814 승환
+    @PostMapping("/write")
+    public ResponseEntity<PostDto> savePost(@RequestBody PostDto postDto){
+        PostDto savePost = postService.savePost(postDto);
+        return new ResponseEntity<>(savePost,
+                HttpStatus.OK);
     }
 
 }
