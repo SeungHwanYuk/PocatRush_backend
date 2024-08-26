@@ -1,0 +1,40 @@
+package DW.PocatRush.controller;
+
+import DW.PocatRush.dto.BaseResponse;
+import DW.PocatRush.dto.CharacterDto;
+import DW.PocatRush.enumstatus.ResultCode;
+import DW.PocatRush.model.Character;
+import DW.PocatRush.service.CharacterService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/character")
+public class CharacterController {
+    private CharacterService characterService;
+
+    @Autowired
+    public CharacterController(CharacterService characterService) {
+        this.characterService = characterService;
+    }
+
+
+    @PostMapping("/create")
+    public ResponseEntity<BaseResponse<Character>> createUserCharacter(@Valid @RequestBody CharacterDto characterDto) {
+        return new ResponseEntity<>(
+                new BaseResponse<>(ResultCode.SUCCESS.name(),
+                        characterService.createUserCharacter(characterDto),
+                        ResultCode.SUCCESS.getMsg()), HttpStatus.OK);
+
+    }
+
+
+}
+

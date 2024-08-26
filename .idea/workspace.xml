@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c9f40a1-b91b-4d21-b265-2193bc4c0c20" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/LikeNPCTestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/model/LikeNPCTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/repository/LikeNPCTestRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/LikeNPCTestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/CharacterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/LevelController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/dto/CharacterDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/model/Character.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/model/Level.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/repository/CharacterRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/repository/LevelRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/CharacterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/LevelService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
