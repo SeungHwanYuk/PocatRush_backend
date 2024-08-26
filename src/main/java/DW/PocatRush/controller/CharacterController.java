@@ -4,16 +4,14 @@ import DW.PocatRush.dto.BaseResponse;
 import DW.PocatRush.dto.CharacterDto;
 import DW.PocatRush.enumstatus.ResultCode;
 import DW.PocatRush.model.Character;
+import DW.PocatRush.model.User;
 import DW.PocatRush.service.CharacterService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/character")
@@ -35,6 +33,14 @@ public class CharacterController {
 
     }
 
+@GetMapping("/get")
+public ResponseEntity<BaseResponse<Character>> getCharacterByUserId(@Valid @RequestBody String userId){
+        return new ResponseEntity<>(
+                new BaseResponse<>(ResultCode.SUCCESS.name(),
+                        characterService.getCharacterByUserId(userId),
+                        ResultCode.SUCCESS.getMsg()),HttpStatus.OK);
+
+}
 
 }
 

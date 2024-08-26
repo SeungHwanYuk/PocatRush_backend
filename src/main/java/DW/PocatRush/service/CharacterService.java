@@ -33,7 +33,7 @@ public class CharacterService {
         level.setLevelId("인간");
         Character character = new Character();
 
-        if(userOptional.isPresent()) {
+        if (userOptional.isPresent()) {
 
             character.setCharNickName(characterDto.getCharNickName());
             character.setUser(userOptional.get());
@@ -46,6 +46,22 @@ public class CharacterService {
             return characterRepository.save(character);
         } else {
             throw new ResourceNotFoundException("User", "ID", characterDto.getUser());
+        }
+    }
+
+    public Character getCharacterByUserId(String userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+
+            Optional<Character> characterOptional = characterRepository.findByUser(userOptional.get());
+            if (characterOptional.isPresent()) {
+
+                return characterOptional.get();
+            } else {
+            throw new ResourceNotFoundException("Character", "ID", userOptional.get());
+            }
+        } else {
+                throw new ResourceNotFoundException("User", "ID", userId);
         }
     }
 }
