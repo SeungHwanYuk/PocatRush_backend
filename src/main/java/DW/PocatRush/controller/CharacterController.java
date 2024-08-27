@@ -33,8 +33,8 @@ public class CharacterController {
 
     }
 
-@GetMapping("/get")
-public ResponseEntity<BaseResponse<Character>> getCharacterByUserId(@Valid @RequestBody String userId){
+@GetMapping("/get/{userId}")
+public ResponseEntity<BaseResponse<Character>> getCharacterByUserId(@PathVariable String userId){
         return new ResponseEntity<>(
                 new BaseResponse<>(ResultCode.SUCCESS.name(),
                         characterService.getCharacterByUserId(userId),
