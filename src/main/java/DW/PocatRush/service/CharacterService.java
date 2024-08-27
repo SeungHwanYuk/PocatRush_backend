@@ -7,8 +7,10 @@ import DW.PocatRush.model.Level;
 import DW.PocatRush.model.User;
 import DW.PocatRush.repository.CharacterRepository;
 import DW.PocatRush.repository.UserRepository;
+import jakarta.transaction.Status;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -27,7 +29,8 @@ public class CharacterService {
         this.userRepository = userRepository;
     }
 
-    public Character createUserCharacter(CharacterDto characterDto) {
+    public String createUserCharacter(CharacterDto characterDto) {
+        System.out.println("캐릭터 정보 : " + characterDto.getUser() + characterDto.getCharNickName() );
         Optional<User> userOptional = userRepository.findById(characterDto.getUser());
         Level level = new Level();
         level.setLevelId("인간");
@@ -43,7 +46,7 @@ public class CharacterService {
             character.setCharHp(10);
             character.setCreateCharDate(LocalDate.now());
             character.setProfileImage(characterDto.getProfileImage());
-            return characterRepository.save(character);
+            return characterRepository.save(character).getCharNickName();
         } else {
             throw new ResourceNotFoundException("User", "ID", characterDto.getUser());
         }
@@ -56,5 +59,16 @@ public class CharacterService {
         } else {
                 throw new ResourceNotFoundException("User", "ID", userId);
         }
+    }
+
+    public HttpStatus checkOverlapCharacter(String nickName) {
+        Optional<Character> characterOptional = characterRepository.findById(nickName);
+        if(characterOptional.isPresent())
+        {
+            return HttpStatus.FOUND;
+        } else {
+            return HttpStatus.NOT_FOUND;
+        }
+
     }
 }

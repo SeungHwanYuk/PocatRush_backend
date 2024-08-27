@@ -25,7 +25,7 @@ public class CharacterController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<BaseResponse<Character>> createUserCharacter(@Valid @RequestBody CharacterDto characterDto) {
+    public ResponseEntity<BaseResponse<String>> createUserCharacter(@Valid @RequestBody CharacterDto characterDto) {
         return new ResponseEntity<>(
                 new BaseResponse<>(ResultCode.SUCCESS.name(),
                         characterService.createUserCharacter(characterDto),
@@ -33,14 +33,19 @@ public class CharacterController {
 
     }
 
-@GetMapping("/get/{userId}")
-public ResponseEntity<BaseResponse<Character>> getCharacterByUserId(@PathVariable String userId){
+    @GetMapping("/get/{userId}")
+    public ResponseEntity<BaseResponse<Character>> getCharacterByUserId(@PathVariable String userId){
         return new ResponseEntity<>(
                 new BaseResponse<>(ResultCode.SUCCESS.name(),
                         characterService.getCharacterByUserId(userId),
                         ResultCode.SUCCESS.getMsg()),HttpStatus.OK);
 
-}
+    }
+
+    @GetMapping("/overlap/{nickName}")
+        public HttpStatus checkOverlapCharacter(@PathVariable String nickName) {
+            return characterService.checkOverlapCharacter(nickName);
+    }
 
 }
 
