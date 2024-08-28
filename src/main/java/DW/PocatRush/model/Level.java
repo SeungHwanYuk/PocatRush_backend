@@ -21,6 +21,9 @@ public class Level {
     @Column(name = "레벨명")
     private String levelId;
 
+    @Column(name = "메달이미지")
+    private String medalImage;
+
     @Column(name = "레벨업필요경험치하한선")
     private long levelUpExpLowLimit;
 
