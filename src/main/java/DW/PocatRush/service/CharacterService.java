@@ -71,4 +71,15 @@ public class CharacterService {
         }
 
     }
+
+    public HttpStatus expUpdate(String nickName,int exp) {
+        Optional<Character> characterOptional = characterRepository.findById(nickName);
+        if(characterOptional.isPresent())
+        {
+            characterOptional.get().setCharExp(characterOptional.get().getCharExp() + exp);
+            return HttpStatus.OK;
+        } else {
+            return HttpStatus.NOT_FOUND;
+        }
+    }
 }

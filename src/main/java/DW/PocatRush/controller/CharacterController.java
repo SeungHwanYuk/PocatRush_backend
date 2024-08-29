@@ -47,5 +47,11 @@ public class CharacterController {
             return characterService.checkOverlapCharacter(nickName);
     }
 
+    @PutMapping("/expupdate/{nickName}/{exp}")
+        public HttpStatus expUpdate(@PathVariable String nickName, @PathVariable int exp) {
+        return characterService.expUpdate(nickName, exp);
+    }
+
+
 }
 
