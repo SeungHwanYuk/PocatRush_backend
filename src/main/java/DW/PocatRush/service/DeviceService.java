@@ -52,4 +52,50 @@ public class DeviceService {
             throw new ResourceNotFoundException("User", "ID", userId);
         }
     }
+
+    public HttpStatus kmUpdateByUserId(String userId, int km) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if(userOptional.isPresent()) {
+            Optional<Device> deviceOptional = deviceRepository.findByUser(userOptional.get());
+            if (deviceOptional.isPresent()) {
+                deviceOptional.get().setKm(km);
+                deviceRepository.save(deviceOptional.get());
+                return HttpStatus.OK;
+            } else {
+                throw new ResourceNotFoundException("Device", "ID", userId);
+            }
+        } else {
+            throw new ResourceNotFoundException("User", "ID", userId);
+        }
+    }
+    public HttpStatus kgUpdateByUserId(String userId, int kg) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if(userOptional.isPresent()) {
+            Optional<Device> deviceOptional = deviceRepository.findByUser(userOptional.get());
+            if (deviceOptional.isPresent()) {
+                deviceOptional.get().setKg(kg);
+                deviceRepository.save(deviceOptional.get());
+                return HttpStatus.OK;
+            } else {
+                throw new ResourceNotFoundException("Device", "ID", userId);
+            }
+        } else {
+            throw new ResourceNotFoundException("User", "ID", userId);
+        }
+    }
+    public HttpStatus minUpdateByUserId(String userId, int min) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if(userOptional.isPresent()) {
+            Optional<Device> deviceOptional = deviceRepository.findByUser(userOptional.get());
+            if (deviceOptional.isPresent()) {
+                deviceOptional.get().setMin(min);
+                deviceRepository.save(deviceOptional.get());
+                return HttpStatus.OK;
+            } else {
+                throw new ResourceNotFoundException("Device", "ID", userId);
+            }
+        } else {
+            throw new ResourceNotFoundException("User", "ID", userId);
+        }
+    }
 }

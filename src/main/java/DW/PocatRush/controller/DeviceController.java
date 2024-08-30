@@ -26,4 +26,17 @@ public class DeviceController {
     public ResponseEntity<Device> deviceCheck(@PathVariable String userId) {
         return new ResponseEntity<>(deviceService.deviceCheck(userId),HttpStatus.OK);
     }
+
+    @PostMapping("/updatekm/{userId}/{km}")
+    public HttpStatus kmUpdateByUserId(@PathVariable String userId ,@PathVariable int km ) {
+        return deviceService.kmUpdateByUserId(userId,km);
+    }
+    @PostMapping("/updatekg/{userId}/{kg}")
+    public HttpStatus kgUpdateByUserId(@PathVariable String userId ,@PathVariable int kg ) {
+        return deviceService.kgUpdateByUserId(userId,kg);
+    }
+    @PostMapping("/updatemin/{userId}/{min}")
+    public HttpStatus minUpdateByUserId(@PathVariable String userId ,@PathVariable int min ) {
+        return deviceService.minUpdateByUserId(userId,min);
+    }
 }
