@@ -61,7 +61,12 @@ public class CharacterService {
     public Character getCharacterByUserId(String userId) {
         Optional<User> userOptional = userRepository.findByUserId(userId);
         if (userOptional.isPresent()) {
-                return characterRepository.findByUser(userOptional.get());
+            Optional<Character> characterOptional = characterRepository.findByUser(userOptional.get());
+            if(characterOptional.isPresent()){
+                return characterOptional.get();
+            } else {
+                throw new ResourceNotFoundException("Character", "ID" , userId);
+            }
         } else {
                 throw new ResourceNotFoundException("User", "ID", userId);
         }

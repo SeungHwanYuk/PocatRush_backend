@@ -37,8 +37,8 @@ public class UserService {
                 userDto.getUserId(),
                 authority,
                 bCryptPasswordEncoder.encode(userDto.getPassword()),
-                userDto.getUserEmail(),
                 userDto.getUserName(),
+                userDto.getUserEmail(),
                 userDto.getGender(),
 
                 LocalDateTime.now());
