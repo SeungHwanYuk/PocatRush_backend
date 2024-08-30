@@ -23,4 +23,6 @@ public class LevelService {
     public List<Level> getLevelList(){
         return levelRepository.findAll().stream().sorted(Comparator.comparing(Level::getLevelUpExpHighLimit)).collect(Collectors.toList());
     }
+
+
 }

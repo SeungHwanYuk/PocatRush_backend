@@ -6,6 +6,7 @@ import DW.PocatRush.model.Character;
 import DW.PocatRush.model.Level;
 import DW.PocatRush.model.User;
 import DW.PocatRush.repository.CharacterRepository;
+import DW.PocatRush.repository.LevelRepository;
 import DW.PocatRush.repository.UserRepository;
 import jakarta.transaction.Status;
 import jakarta.transaction.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -23,10 +25,14 @@ public class CharacterService {
 
     private UserRepository userRepository;
 
+    private LevelRepository levelRepository;
+
+
     @Autowired
-    public CharacterService(CharacterRepository characterRepository, UserRepository userRepository) {
+    public CharacterService(CharacterRepository characterRepository, UserRepository userRepository, LevelRepository levelRepository) {
         this.characterRepository = characterRepository;
         this.userRepository = userRepository;
+        this.levelRepository = levelRepository;
     }
 
     public String createUserCharacter(CharacterDto characterDto) {
@@ -77,9 +83,21 @@ public class CharacterService {
         if(characterOptional.isPresent())
         {
             characterOptional.get().setCharExp(characterOptional.get().getCharExp() + exp);
+            levelUpCheck(characterOptional.get());
             return HttpStatus.OK;
         } else {
             return HttpStatus.NOT_FOUND;
         }
+    }
+
+    public void levelUpCheck(Character characterData) {
+        characterData.setLevel(
+                levelRepository.findAll()
+                .stream()
+                .filter(l -> l.getLevelUpExpLowLimit() <= characterData.getCharExp() &&
+                        l.getLevelUpExpHighLimit() >= characterData.getCharExp())
+                        .toList().getFirst()
+        );
+        characterRepository.save(characterData);
     }
 }
