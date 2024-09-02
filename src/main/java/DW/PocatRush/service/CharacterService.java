@@ -83,19 +83,19 @@ public class CharacterService {
 
     }
 
-    public HttpStatus expUpdate(String nickName,int exp) {
+    public String expUpdate(String nickName,int exp) {
         Optional<Character> characterOptional = characterRepository.findById(nickName);
         if(characterOptional.isPresent())
         {
             characterOptional.get().setCharExp(characterOptional.get().getCharExp() + exp);
-            levelUpCheck(characterOptional.get());
-            return HttpStatus.OK;
+            return levelUpCheck(characterOptional.get());
+
         } else {
-            return HttpStatus.NOT_FOUND;
+            throw new ResourceNotFoundException("Character" , "Nickname", nickName);
         }
     }
 
-    public void levelUpCheck(Character characterData) {
+    public String levelUpCheck(Character characterData) {
         characterData.setLevel(
                 levelRepository.findAll()
                 .stream()
@@ -104,5 +104,17 @@ public class CharacterService {
                         .toList().getFirst()
         );
         characterRepository.save(characterData);
+        return characterData.getLevel().getLevelId();
+    }
+
+    public HttpStatus hpUpdateByNickname(String nickName, int newHp) {
+        Optional<Character> characterOptional = characterRepository.findById(nickName);
+        if(characterOptional.isPresent()) {
+            characterOptional.get().setCharHp(newHp);
+            characterRepository.save(characterOptional.get());
+            return HttpStatus.OK;
+        } else {
+            return HttpStatus.NOT_FOUND;
+        }
     }
 }

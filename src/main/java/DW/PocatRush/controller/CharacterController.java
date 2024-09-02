@@ -47,9 +47,16 @@ public class CharacterController {
             return characterService.checkOverlapCharacter(nickName);
     }
 
+    
+    // 경험치 획득 후 레벨업시 레벨ID 리턴
     @PutMapping("/expupdate/{nickName}/{exp}")
-        public HttpStatus expUpdate(@PathVariable String nickName, @PathVariable int exp) {
-        return characterService.expUpdate(nickName, exp);
+        public ResponseEntity<String> expUpdate(@PathVariable String nickName, @PathVariable int exp) {
+        return new ResponseEntity<>(characterService.expUpdate(nickName, exp),HttpStatus.OK);
+    }
+
+    @PutMapping("/hpupdate/{nickName}/{newHp}")
+        public HttpStatus hpUpdateByNickname(@PathVariable String nickName, @PathVariable int newHp) {
+        return characterService.hpUpdateByNickname(nickName,newHp);
     }
 
 
