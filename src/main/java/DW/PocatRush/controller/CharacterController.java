@@ -54,9 +54,9 @@ public class CharacterController {
         return new ResponseEntity<>(characterService.expUpdate(nickName, exp),HttpStatus.OK);
     }
 
-    @PutMapping("/hpupdate/{nickName}/{newHp}")
-        public HttpStatus hpUpdateByNickname(@PathVariable String nickName, @PathVariable int newHp) {
-        return characterService.hpUpdateByNickname(nickName,newHp);
+    @PutMapping("/hpupdate/{nickName}")
+        public HttpStatus hpUpdateByNickname(@PathVariable String nickName) {
+        return characterService.hpUpdateByNickname(nickName);
     }
 
 

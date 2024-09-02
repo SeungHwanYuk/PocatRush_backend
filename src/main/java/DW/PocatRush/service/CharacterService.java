@@ -36,6 +36,10 @@ public class CharacterService {
     }
 
     public String createUserCharacter(CharacterDto characterDto) {
+        Optional<Character> characterOptional = characterRepository.findById(characterDto.getCharNickName());
+        if(characterOptional.isPresent()) {
+            return characterOptional.get() + "는 존재하는 캐릭터 닉네임 입니다";
+        }
         System.out.println("캐릭터 정보 : " + characterDto.getUser() + characterDto.getCharNickName() );
         Optional<User> userOptional = userRepository.findById(characterDto.getUser());
         Level level = new Level();
@@ -43,7 +47,6 @@ public class CharacterService {
         Character character = new Character();
 
         if (userOptional.isPresent()) {
-
             character.setCharNickName(characterDto.getCharNickName());
             character.setUser(userOptional.get());
             character.setLevel(level);
@@ -107,10 +110,10 @@ public class CharacterService {
         return characterData.getLevel().getLevelId();
     }
 
-    public HttpStatus hpUpdateByNickname(String nickName, int newHp) {
+    public HttpStatus hpUpdateByNickname(String nickName) {
         Optional<Character> characterOptional = characterRepository.findById(nickName);
         if(characterOptional.isPresent()) {
-            characterOptional.get().setCharHp(newHp);
+            characterOptional.get().setCharHp(characterOptional.get().getCharHp()-1);
             characterRepository.save(characterOptional.get());
             return HttpStatus.OK;
         } else {
