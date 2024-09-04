@@ -36,7 +36,7 @@ public class PostController {
     @PostMapping("/write")
     public ResponseEntity<PostDto> savePost(@RequestBody PostDto postDto){
         PostDto savePost = postService.savePost(postDto);
-        return new ResponseEntity<>(savePost,
+        return new ResponseEntity<>(postService.savePost(postDto),
                 HttpStatus.OK);
     }
 
