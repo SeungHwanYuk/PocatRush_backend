@@ -1,5 +1,6 @@
 package DW.PocatRush.service;
 
+import DW.PocatRush.dto.DeviceDto;
 import DW.PocatRush.exception.ResourceNotFoundException;
 import DW.PocatRush.model.Device;
 import DW.PocatRush.model.User;
@@ -98,4 +99,21 @@ public class DeviceService {
             throw new ResourceNotFoundException("User", "ID", userId);
         }
     }
+
+    public HttpStatus plusDeviceData(DeviceDto deviceDto){
+        Optional<Device> deviceOptional = deviceRepository.findById(deviceDto.getDeviceId());
+        if(deviceOptional.isPresent()){
+            deviceOptional.get().setKm(deviceDto.getKm());
+            deviceOptional.get().setKg(deviceDto.getKg());
+            deviceOptional.get().setMin(deviceDto.getMin());
+            deviceRepository.save(deviceOptional.get());
+        return HttpStatus.OK;
+        }else {
+            throw new ResourceNotFoundException("Device","Id",deviceDto.getDeviceId());
+        }
+
+
+    }
+
+
 }

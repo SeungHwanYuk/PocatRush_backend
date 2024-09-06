@@ -11,5 +11,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DeviceDto {
 
-    private String userId;
+    private String deviceId;
+    private int km;
+    private int kg;
+    private int min;
+
+
+
 }

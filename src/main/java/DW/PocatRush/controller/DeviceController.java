@@ -1,5 +1,6 @@
 package DW.PocatRush.controller;
 
+import DW.PocatRush.dto.DeviceDto;
 import DW.PocatRush.model.Device;
 import DW.PocatRush.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,11 @@ public class DeviceController {
     public HttpStatus minUpdateByUserId(@PathVariable String userId ,@PathVariable int min ) {
         return deviceService.minUpdateByUserId(userId,min);
     }
+
+    @PostMapping("/plusdata")
+    public HttpStatus plusDeviceData(@RequestBody DeviceDto deviceDto){
+        return deviceService.plusDeviceData(deviceDto);
+    }
+
+
 }
