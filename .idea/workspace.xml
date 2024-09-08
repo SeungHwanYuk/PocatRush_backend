@@ -7,7 +7,7 @@
     <list default="true" id="2c9f40a1-b91b-4d21-b265-2193bc4c0c20" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/DeviceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/DeviceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/dto/DeviceDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/dto/DeviceDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/PostController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/DeviceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/DeviceService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

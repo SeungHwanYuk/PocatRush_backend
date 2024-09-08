@@ -42,8 +42,8 @@ public class DeviceController {
     }
 
     @PostMapping("/plusdata")
-    public HttpStatus plusDeviceData(@RequestBody DeviceDto deviceDto){
-        return deviceService.plusDeviceData(deviceDto);
+    public ResponseEntity<Device> plusDeviceData(@RequestBody DeviceDto deviceDto){
+        return new ResponseEntity<>(deviceService.plusDeviceData(deviceDto), HttpStatus.OK);
     }
 
 

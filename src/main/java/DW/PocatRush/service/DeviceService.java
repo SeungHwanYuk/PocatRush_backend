@@ -100,14 +100,14 @@ public class DeviceService {
         }
     }
 
-    public HttpStatus plusDeviceData(DeviceDto deviceDto){
+    public Device plusDeviceData(DeviceDto deviceDto){
         Optional<Device> deviceOptional = deviceRepository.findById(deviceDto.getDeviceId());
         if(deviceOptional.isPresent()){
-            deviceOptional.get().setKm(deviceDto.getKm());
-            deviceOptional.get().setKg(deviceDto.getKg());
-            deviceOptional.get().setMin(deviceDto.getMin());
+            deviceOptional.get().setKm(deviceOptional.get().getKm()+deviceDto.getKm());
+            deviceOptional.get().setKg(deviceOptional.get().getKg()+deviceDto.getKg());
+            deviceOptional.get().setMin(deviceOptional.get().getMin()+deviceDto.getMin());
             deviceRepository.save(deviceOptional.get());
-        return HttpStatus.OK;
+        return deviceOptional.get();
         }else {
             throw new ResourceNotFoundException("Device","Id",deviceDto.getDeviceId());
         }

@@ -35,7 +35,6 @@ public class PostController {
     // 글쓰기 (게시판 번호 포함되어야함) 0814 승환
     @PostMapping("/write")
     public ResponseEntity<PostDto> savePost(@RequestBody PostDto postDto){
-        PostDto savePost = postService.savePost(postDto);
         return new ResponseEntity<>(postService.savePost(postDto),
                 HttpStatus.OK);
     }
