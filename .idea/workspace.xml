@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c9f40a1-b91b-4d21-b265-2193bc4c0c20" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/ItemsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/UserItemHistoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/dto/UserItemHistoryDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/model/UserItemHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/repository/ItemsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/ItemsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/UserItemHistoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/DeviceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/DeviceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/DeviceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/DeviceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/model/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/model/Items.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/repository/ItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/repository/UserItemHistoryRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,8 +79,10 @@
       <recent name="C:\Users\admin\Documents\GitHub\PocatRush\src\main\java\DW\PocatRush\exception" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="DW.PocatRush.model" />
       <recent name="DW.PocatRush.controller" />
+      <recent name="DW.PocatRush.service" />
+      <recent name="DW.PocatRush.repository" />
+      <recent name="DW.PocatRush.model" />
       <recent name="DW.PocatRush.dto" />
     </key>
   </component>
