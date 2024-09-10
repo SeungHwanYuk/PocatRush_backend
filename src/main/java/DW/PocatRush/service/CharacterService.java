@@ -1,12 +1,15 @@
 package DW.PocatRush.service;
 
 import DW.PocatRush.dto.CharacterDto;
+import DW.PocatRush.dto.UserItemHistoryDto;
 import DW.PocatRush.exception.ResourceNotFoundException;
 import DW.PocatRush.model.Character;
 import DW.PocatRush.model.Level;
 import DW.PocatRush.model.User;
+import DW.PocatRush.model.UserItemHistory;
 import DW.PocatRush.repository.CharacterRepository;
 import DW.PocatRush.repository.LevelRepository;
+import DW.PocatRush.repository.UserItemHistoryRepository;
 import DW.PocatRush.repository.UserRepository;
 import jakarta.transaction.Status;
 import jakarta.transaction.Transactional;
@@ -27,13 +30,22 @@ public class CharacterService {
 
     private LevelRepository levelRepository;
 
+    private UserItemHistoryRepository userItemHistoryRepository;
+
+    private UserItemHistoryService userItemHistoryService;
+
 
     @Autowired
-    public CharacterService(CharacterRepository characterRepository, UserRepository userRepository, LevelRepository levelRepository) {
+    public CharacterService(CharacterRepository characterRepository, UserRepository userRepository, LevelRepository levelRepository, UserItemHistoryRepository userItemHistoryRepository, UserItemHistoryService userItemHistoryService) {
         this.characterRepository = characterRepository;
         this.userRepository = userRepository;
         this.levelRepository = levelRepository;
+        this.userItemHistoryRepository = userItemHistoryRepository;
+        this.userItemHistoryService = userItemHistoryService;
     }
+
+
+
 
     public String createUserCharacter(CharacterDto characterDto) {
         Optional<Character> characterOptional = characterRepository.findById(characterDto.getCharNickName());
@@ -45,7 +57,6 @@ public class CharacterService {
         Level level = new Level();
         level.setLevelId("인간");
         Character character = new Character();
-
         if (userOptional.isPresent()) {
             character.setCharNickName(characterDto.getCharNickName());
             character.setUser(userOptional.get());
@@ -55,7 +66,9 @@ public class CharacterService {
             character.setCharHp(10);
             character.setCreateCharDate(LocalDate.now());
             character.setProfileImage(characterDto.getProfileImage());
-            return characterRepository.save(character).getCharNickName();
+            characterRepository.save(character);
+            userItemHistoryService.setItemDefaultValue(character);
+            return character.getCharNickName();
         } else {
             throw new ResourceNotFoundException("User", "ID", characterDto.getUser());
         }
@@ -110,14 +123,16 @@ public class CharacterService {
         return characterData.getLevel().getLevelId();
     }
 
-    public HttpStatus hpUpdateByNickname(String nickName) {
+    public Character hpUpdateByNickname(String nickName, int newHp) {
+        int hp = newHp -1;
+        System.out.println("newHP : "+newHp+ "Hp : "+ hp);
         Optional<Character> characterOptional = characterRepository.findById(nickName);
         if(characterOptional.isPresent()) {
-            characterOptional.get().setCharHp(characterOptional.get().getCharHp()-1);
-            characterRepository.save(characterOptional.get());
-            return HttpStatus.OK;
+            characterOptional.get().setCharHp(hp);
+            System.out.println("캐릭터 HP : "+characterOptional.get().getCharHp());
+            return characterRepository.save(characterOptional.get());
         } else {
-            return HttpStatus.NOT_FOUND;
+            throw new ResourceNotFoundException("Character","ID",nickName);
         }
     }
 }

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/itemhistory")
 public class UserItemHistoryController {
@@ -23,6 +25,11 @@ public class UserItemHistoryController {
     @PostMapping("/update")
     public ResponseEntity<UserItemHistory> userItemUpdate (@RequestBody UserItemHistoryDto userItemHistoryDto) {
         return new ResponseEntity<>(userItemHistoryService.userItemUpdate(userItemHistoryDto), HttpStatus.OK);
+    }
+
+    @GetMapping("/getlist/{charNickName}")
+    public ResponseEntity<List<UserItemHistoryDto>> getItemHistoryByCharNickName (@PathVariable String charNickName) {
+        return new ResponseEntity<>(userItemHistoryService.getItemHistoryByCharNickName(charNickName),HttpStatus.OK);
     }
 
 

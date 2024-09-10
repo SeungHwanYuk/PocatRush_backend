@@ -38,7 +38,7 @@ public class UserItemHistoryService {
         Optional<Items> itemsOptional = itemsRepository.findById(userItemHistoryDto.getItemId());
         if (characterOptional.isPresent() && itemsOptional.isPresent()) {
             Optional<UserItemHistory> userItemHistoryOptional = userItemHistoryRepository.findAll()
-                            .stream()
+                    .stream()
                     .filter(userItemHistory -> characterOptional.get().equals(userItemHistory.getCharNickName()))
                     .filter(userItemHistory -> itemsOptional.get().equals(userItemHistory.getItemId()))
                     .findFirst();
@@ -58,6 +58,41 @@ public class UserItemHistoryService {
             }
         } else {
             throw new ResourceNotFoundException("CharNickName", "ID", userItemHistoryDto.getCharNickName());
+        }
+    }
+
+    // 기본 아이템 세팅
+    public void setItemDefaultValue(Character charNickName) {
+        try {
+            Optional<Items> churuOptional = itemsRepository.findById("id_churu");
+            Optional<Items> coinOptional = itemsRepository.findById("id_gameShopCoin");
+            UserItemHistory defaultChuru = new UserItemHistory();
+            UserItemHistory defaultCoin = new UserItemHistory();
+            if (churuOptional.isPresent()) {
+                defaultChuru.setItemId(churuOptional.get());
+                defaultChuru.setCharNickName(charNickName);
+                defaultChuru.setItemValue(3);
+            }
+            if (coinOptional.isPresent()) {
+                defaultCoin.setItemId(coinOptional.get());
+                defaultCoin.setItemValue(3);
+                defaultCoin.setCharNickName(charNickName);
+            }
+            userItemHistoryRepository.save(defaultChuru);
+            userItemHistoryRepository.save(defaultCoin);
+        } catch (Exception e) {
+            throw new ResourceNotFoundException("Character", "ID",charNickName);
+        }
+    }
+
+
+
+    public List<UserItemHistoryDto> getItemHistoryByCharNickName(String charNickName) {
+        Optional<Character> characterOptional = characterRepository.findById(charNickName);
+        if(characterOptional.isPresent()){
+            return UserItemHistoryDto.toDtoFromUserItemHistory(userItemHistoryRepository.findByCharNickName(characterOptional.get()).get());
+        } else {
+            throw new ResourceNotFoundException("Character", "Nickname", charNickName);
         }
     }
 }

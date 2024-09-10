@@ -49,14 +49,14 @@ public class CharacterController {
 
     
     // 경험치 획득 후 레벨업시 레벨ID 리턴
-    @PutMapping("/expupdate/{nickName}/{exp}")
+    @PostMapping("/expupdate/{nickName}/{exp}")
         public ResponseEntity<String> expUpdate(@PathVariable String nickName, @PathVariable int exp) {
         return new ResponseEntity<>(characterService.expUpdate(nickName, exp),HttpStatus.OK);
     }
 
-    @PutMapping("/hpupdate/{nickName}")
-        public HttpStatus hpUpdateByNickname(@PathVariable String nickName) {
-        return characterService.hpUpdateByNickname(nickName);
+    @PostMapping("/hpupdate/{nickName}/{newHp}")
+        public Character hpUpdateByNickname(@PathVariable String nickName, @PathVariable int newHp) {
+        return characterService.hpUpdateByNickname(nickName, newHp);
     }
 
 

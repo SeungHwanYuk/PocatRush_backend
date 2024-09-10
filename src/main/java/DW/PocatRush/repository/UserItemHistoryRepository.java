@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface UserItemHistoryRepository extends JpaRepository<UserItemHistory, String> {
 
-    Optional<UserItemHistory> findByCharNickName(Character character);
+    Optional<List<UserItemHistory>> findByCharNickName(Character character);
 }
