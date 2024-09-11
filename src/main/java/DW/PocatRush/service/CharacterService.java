@@ -1,6 +1,7 @@
 package DW.PocatRush.service;
 
 import DW.PocatRush.dto.CharacterDto;
+import DW.PocatRush.dto.RankCharacterDto;
 import DW.PocatRush.dto.UserItemHistoryDto;
 import DW.PocatRush.exception.ResourceNotFoundException;
 import DW.PocatRush.model.Character;
@@ -18,6 +19,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -47,6 +51,8 @@ public class CharacterService {
 
 
 
+    // 캐릭터 만들기
+    // 생성시 기본 스텟 조정 및 기본아이템 증정
     public String createUserCharacter(CharacterDto characterDto) {
         Optional<Character> characterOptional = characterRepository.findById(characterDto.getCharNickName());
         if(characterOptional.isPresent()) {
@@ -74,6 +80,7 @@ public class CharacterService {
         }
     }
 
+    // 유저아이디로 캐릭터 찾기
     public Character getCharacterByUserId(String userId) {
         Optional<User> userOptional = userRepository.findByUserId(userId);
         if (userOptional.isPresent()) {
@@ -88,6 +95,7 @@ public class CharacterService {
         }
     }
 
+    // 닉네임 중복확인
     public HttpStatus checkOverlapCharacter(String nickName) {
         Optional<Character> characterOptional = characterRepository.findById(nickName);
         if(characterOptional.isPresent())
@@ -99,6 +107,7 @@ public class CharacterService {
 
     }
 
+    // 경험치 업데이트
     public String expUpdate(String nickName,int exp) {
         Optional<Character> characterOptional = characterRepository.findById(nickName);
         if(characterOptional.isPresent())
@@ -111,6 +120,7 @@ public class CharacterService {
         }
     }
 
+    // 경험치를 업데이트하고 레벨상한선에 도달했는지 확인
     public String levelUpCheck(Character characterData) {
         characterData.setLevel(
                 levelRepository.findAll()
@@ -123,16 +133,34 @@ public class CharacterService {
         return characterData.getLevel().getLevelId();
     }
 
-    public Character hpUpdateByNickname(String nickName, int newHp) {
-        int hp = newHp -1;
-        System.out.println("newHP : "+newHp+ "Hp : "+ hp);
-        Optional<Character> characterOptional = characterRepository.findById(nickName);
-        if(characterOptional.isPresent()) {
-            characterOptional.get().setCharHp(hp);
-            System.out.println("캐릭터 HP : "+characterOptional.get().getCharHp());
-            return characterRepository.save(characterOptional.get());
-        } else {
-            throw new ResourceNotFoundException("Character","ID",nickName);
+    // hp 업데이트
+    public void hpUpdateByNickname(String nickName, int newHp) {
+        System.out.println("hp업데이트");
+         characterRepository.findById(nickName)
+                .get()
+                .setCharHp(newHp - 1);
+//        if(characterOptional.isPresent()) {
+////            characterOptional.get().setCharHp(hp);
+//            System.out.println("캐릭터 HP : "+characterOptional.get().getCharHp());
+//            return characterRepository.save(characterOptional.get());
+//        } else {
+//            throw new ResourceNotFoundException("Character","ID",nickName);
+//        }
+    }
+
+    // 랭킹표시용 캐릭터 경험치 많은 순 얻기
+    public List<RankCharacterDto> getCharacterListForRank() {
+        int rank = 1;
+        List<RankCharacterDto> rankCharacterDtoList = new ArrayList<>();
+        List<Character> characterList = characterRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Character::getCharExp).reversed())
+                .toList();
+        for (Character character : characterList) {
+            rankCharacterDtoList.add(
+                    RankCharacterDto.toCharDtoFromChar(rank, character));
+            rank++;
         }
+        return rankCharacterDtoList;
     }
 }

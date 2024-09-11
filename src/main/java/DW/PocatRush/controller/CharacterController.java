@@ -2,6 +2,7 @@ package DW.PocatRush.controller;
 
 import DW.PocatRush.dto.BaseResponse;
 import DW.PocatRush.dto.CharacterDto;
+import DW.PocatRush.dto.RankCharacterDto;
 import DW.PocatRush.enumstatus.ResultCode;
 import DW.PocatRush.model.Character;
 import DW.PocatRush.model.User;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/character")
@@ -55,8 +58,16 @@ public class CharacterController {
     }
 
     @PostMapping("/hpupdate/{nickName}/{newHp}")
-        public Character hpUpdateByNickname(@PathVariable String nickName, @PathVariable int newHp) {
-        return characterService.hpUpdateByNickname(nickName, newHp);
+        public String hpUpdateByNickname(@PathVariable String nickName, @PathVariable int newHp) {
+         characterService.hpUpdateByNickname(nickName, newHp);
+         return "hp 업데이트 완료";
+    }
+
+    // 랭킹용 캐릭터 모두얻기
+    @GetMapping("/ranklist")
+        public ResponseEntity<List<RankCharacterDto>> getCharacterListForRank(){
+        return new ResponseEntity<>(
+                characterService.getCharacterListForRank(),HttpStatus.OK);
     }
 
 
