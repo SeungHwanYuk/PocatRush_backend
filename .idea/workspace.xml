@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c9f40a1-b91b-4d21-b265-2193bc4c0c20" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/dto/RankCharacterDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/CharacterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/controller/CharacterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/model/Device.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/model/Device.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/CharacterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DW/PocatRush/service/CharacterService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
