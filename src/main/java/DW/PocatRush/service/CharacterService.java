@@ -71,7 +71,7 @@ public class CharacterService {
             character.setUserPoint(100);
             character.setCharHp(10);
             character.setCreateCharDate(LocalDate.now());
-            character.setProfileImage(characterDto.getProfileImage());
+            character.setProfileImage("https://i.ibb.co/W3SfT3Y/human.png()");
             characterRepository.save(character);
             userItemHistoryService.setItemDefaultValue(character);
             return character.getCharNickName();
