@@ -20,6 +20,6 @@ https://github.com/SeungHwanYuk/PocatRush_frontend
 
 <br>
 
-이곳의 ReadMe를 참고해주세요.
+이곳의 README.md를 참고해주세요.
 
 <br>
