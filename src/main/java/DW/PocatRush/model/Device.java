@@ -50,9 +50,9 @@ public class Device {
 
     @PrePersist
     public void generateDeviceId() {
-            // ID 생성 로직 구현
-            if (this.deviceId == null) {
-                this.deviceId = "DEV" + String.format("%010d", random.nextInt(1000000000));
-            }
+        // ID 생성 로직 구현
+        if (this.deviceId == null) {
+            this.deviceId = "DEV" + String.format("%010d", random.nextInt(1000000000));
+        }
     }
 }
