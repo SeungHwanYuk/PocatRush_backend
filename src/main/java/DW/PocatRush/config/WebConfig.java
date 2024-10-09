@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5501" , "http://localhost:3000", "http://192.168.0.44:81")// 이 주소로 오는 것은 다 받아줌
+                .allowedOrigins("http://127.0.0.1:5500", "http://127.0.0.1:5501" , "http://localhost:3000", "http://192.168.0.44:81", "/**")// 이 주소로 오는 것은 다 받아줌
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 허용하는 메소드
                 .allowCredentials(true); // 인증정보 시도
         // 리액트 -> 서버로 요청 할 때
